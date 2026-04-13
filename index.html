@@ -55,6 +55,7 @@ btn.addEventListener('click', async () => {
     deferredPrompt.prompt();
     await deferredPrompt.userChoice;
     deferredPrompt = null;
+    btn.style.display = 'none';
   }
 });
 
@@ -63,10 +64,10 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
-// redireciona após 2 segundos (tempo suficiente pro install aparecer)
+// redireciona rápido (mantém possibilidade de instalação)
 setTimeout(() => {
   window.location.href = "https://adcapspm.blogspot.com/";
-}, 2000);
+}, 1500);
 </script>
 
 </body>
