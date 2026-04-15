@@ -3,15 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ADCAP SPM</title>
 
+<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b5d2a">
+
+<!-- iOS suporte -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ADCAP SPM">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 
 <style>
 body {
   margin:0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background:#0b5d2a;
   color:white;
   display:flex;
@@ -21,6 +29,15 @@ body {
   height:100vh;
   text-align:center;
 }
+
+h1 {
+  margin-bottom:10px;
+}
+
+p {
+  opacity:0.8;
+}
+
 button {
   background:white;
   color:#0b5d2a;
@@ -28,6 +45,8 @@ button {
   padding:12px 20px;
   border-radius:8px;
   margin-top:20px;
+  font-weight:bold;
+  cursor:pointer;
 }
 </style>
 
@@ -43,6 +62,7 @@ button {
 let deferredPrompt;
 const btn = document.getElementById('installBtn');
 
+// Android install
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
@@ -58,10 +78,12 @@ btn.addEventListener('click', async () => {
   }
 });
 
+// Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
+// Redirecionamento
 setTimeout(() => {
   window.location.href = "https://adcapspm.blogspot.com/";
 }, 2500);
