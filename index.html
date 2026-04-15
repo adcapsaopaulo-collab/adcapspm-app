@@ -7,18 +7,64 @@
 
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b5d2a">
-<link rel="icon" href="icons/icon-192.png">
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  background:#0b5d2a;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  text-align:center;
+}
+button {
+  background:white;
+  color:#0b5d2a;
+  border:none;
+  padding:12px 20px;
+  border-radius:8px;
+  margin-top:20px;
+}
+</style>
 
 </head>
 <body>
 
+<h1>ADCAP SPM</h1>
+<p>Carregando...</p>
+
+<button id="installBtn" style="display:none;">Instalar App</button>
+
 <script>
+let deferredPrompt;
+const btn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  btn.style.display = 'block';
+});
+
+btn.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    btn.style.display = 'none';
+  }
+});
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
-// abre direto no blog
-window.location.replace("https://adcapspm.blogspot.com/");
+setTimeout(() => {
+  window.location.href = "https://adcapspm.blogspot.com/";
+}, 2500);
 </script>
 
 </body>
