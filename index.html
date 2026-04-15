@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADCAP SPM</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b5d2a">
+<link rel="icon" href="icons/icon-192.png">
+
+</head>
+<body>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+// abre direto no blog
+window.location.replace("https://adcapspm.blogspot.com/");
+</script>
+
+</body>
+</html>
